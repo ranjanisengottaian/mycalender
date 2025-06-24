@@ -1,0 +1,60 @@
+[
+  {
+    "startTime": "00:00",
+    "endTime": "01:30",
+    "color": "#f6be23",
+    "title": "Daily Standup",
+    "date": "2025-06-23"
+  },
+  {
+    "startTime": "04:30",
+    "endTime": "07:30",
+    "color": "#f6501e",
+    "title": "Weekly Catchup",
+    "date": "2025-06-23"
+  },
+
+    {
+      "startTime": "09:00",
+      "endTime": "10:00",
+      "color": "#34d399",
+      "title": "Google meet",
+      "date": "2025-06-25"
+    },
+    {
+      "startTime": "14:00",
+      "endTime": "15:30",
+      "color": "#8b5cf6",
+      "title": "Project Review",
+      "date": "2025-06-27"
+    },
+    {
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "color": "#06b6d4",
+      "title": "Priya's marriage",
+      "date": "2025-06-30"
+    },
+    {
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "color": "#06b6d4",
+      "title": "Priya marriage",
+      "date": "2025-06-30"
+    },
+    {
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "color": "#06b6d4",
+      "title": "Priya's marriage",
+      "date": "2025-06-30"
+    },
+    {
+      "startTime": "10:00",
+      "endTime": "11:00",
+      "color": "#06b6d4",
+      "title": "Priya's marriage",
+      "date": "2025-06-30"
+    }
+
+]
