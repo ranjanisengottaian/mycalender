@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import DropdownMenu from './DropdownMenu';
 
-const CalendarHeader = ({
+const Navbar = ({
   goToToday,
   navigateMonth,
   currentMonth,
@@ -24,7 +24,7 @@ const CalendarHeader = ({
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm ">
           <img src="calender_icon.png" alt="" className='w-full h-full rounded-full object-cover' />
           </div>
-          <span className="text-xl font-semibold text-gray-700">Calendar</span>
+          <span className="text-xl font-semibold text-gray-700">EventCalender</span>
         </div>
 
         {/* Today Button */}
@@ -88,7 +88,7 @@ const CalendarHeader = ({
   );
 };
 
-export default CalendarHeader;
+export default Navbar;
 // import React, { useState } from 'react';
 // import { ChevronLeft, ChevronRight, Calendar, Sparkles, Zap, Star, ChevronDown } from 'lucide-react';
 
@@ -138,7 +138,7 @@ export default CalendarHeader;
 //   );
 // };
 
-// const CalendarHeader = ({
+// const Navbar = ({
 //   goToToday = () => console.log('Go to today'),
 //   navigateMonth = (direction) => console.log('Navigate month:', direction),
 //   currentMonth = 5, // June (0-indexed)
@@ -317,4 +317,4 @@ export default CalendarHeader;
 //   );
 // };
 
-// export default CalendarHeader;
+// export default Navbar;

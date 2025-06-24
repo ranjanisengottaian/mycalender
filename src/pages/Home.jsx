@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import sampleEvents from '../data/events.json';
-import CalendarHeader from '../components/CalendarHeader';
+import Navbar from '../components/Navbar';
 import CalendarGrid from '../components/CalenderGrid';
 import Tooltip from '../components/Tooltip';
+import LeftContainer from '../components/LeftContainer'; 
 
 const Home = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
@@ -88,36 +89,44 @@ while (days.length < totalCells) {
 
   return (
     <div className="h-screen bg-white flex flex-col relative">
-      <CalendarHeader
-        {...{
-          goToToday,
-          navigateMonth,
-          currentMonth,
-          currentYear,
-          monthNames,
-          years,
-          handleMonthChange: (m) => setCurrentDate(currentDate.month(m)),
-          handleYearChange: (y) => setCurrentDate(currentDate.year(y)),
-          dropdownType,
-          showDropdown,
-          setDropdownType,
-          setShowDropdown
-        }}
-      />
-      <CalendarGrid
-        {...{
-          days,
-          daysOfWeek,
-          isToday,
-          getEventsForDate,
-          formatTime,
-          handleMouseEnter,
-          handleMouseLeave,
-          hoveredDate
-        }}
-      />
-      <Tooltip tooltip={tooltip} />
+    <Navbar
+      {...{
+        goToToday,
+        navigateMonth,
+        currentMonth,
+        currentYear,
+        monthNames,
+        years,
+        handleMonthChange: (m) => setCurrentDate(currentDate.month(m)),
+        handleYearChange: (y) => setCurrentDate(currentDate.year(y)),
+        dropdownType,
+        showDropdown,
+        setDropdownType,
+        setShowDropdown
+      }}
+    />
+    <div className="flex flex-1 overflow-hidden">
+      {/* Left Sidebar */}
+      <LeftContainer currentDate={currentDate} events={events} />
+
+      {/* Main Calendar Grid */}
+      <div className="flex-1 overflow-auto">
+        <CalendarGrid
+          {...{
+            days,
+            daysOfWeek,
+            isToday,
+            getEventsForDate,
+            formatTime,
+            handleMouseEnter,
+            handleMouseLeave,
+            hoveredDate
+          }}
+        />
+      </div>
     </div>
+    <Tooltip tooltip={tooltip} />
+  </div>
   );
 };
 
