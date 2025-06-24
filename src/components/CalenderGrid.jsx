@@ -12,9 +12,9 @@ const CalendarGrid = ({
 }) => (
   <div className="flex-1 p-4 sm:p-6 bg-white">
     {/* Weekday Headers */}
-    <div className="grid grid-cols-7 mb-4 text-center text-s font-bold text-gray-1000 uppercase tracking-wide">
+    <div className="grid grid-cols-7 mb-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wide">
       {daysOfWeek.map((day) => (
-        <div key={day} className="py-2">
+        <div key={day} >
           {day}
         </div>
       ))}
@@ -42,7 +42,7 @@ const CalendarGrid = ({
               <div
                 className={`
                   text-sm mb-1 w-8 h-8 flex items-center justify-center rounded-full self-end
-                  ${isCurrentDay ? 'bg-blue-600 text-white font-bold' : day.isCurrentMonth ? 'text-gray-1000' : 'text-gray-500'}
+                  ${isCurrentDay ? 'bg-blue-600 text-white font-bold' : day.isCurrentMonth ? 'text-gray-700 font-bold ' : 'text-gray-500'}
                 `}
               >
                 {day.fullDate.date()}

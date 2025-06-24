@@ -47,7 +47,7 @@ const Navbar = ({
         </div>
 
         {/* Current Month Label */}
-<h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 tracking-tight drop-shadow-sm">
+<h1 className="text-2xl sm:text-3xl font-semibold text-gray-700 tracking-tight drop-shadow-sm">
   {monthNames[currentMonth]} {currentYear}
 </h1>
 
