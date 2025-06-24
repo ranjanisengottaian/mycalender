@@ -1,29 +1,3 @@
-// import React from 'react';
-
-// const Tooltip = ({ tooltip }) => {
-//   if (!tooltip.show) return null;
-
-//   return (
-//     <div 
-//       className="fixed z-50 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg pointer-events-none max-w-xs"
-//       style={{
-//         left: tooltip.x,
-//         top: tooltip.y,
-//         transform: 'translateX(-50%) translateY(-100%)',
-//         whiteSpace: 'pre-line'
-//       }}
-//     >
-//       <div className="relative">
-//         {tooltip.content}
-//         <div 
-//           className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"
-//         ></div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Tooltip;
 const Tooltip = ({ tooltip }) => {
   if (!tooltip.show) return null;
 

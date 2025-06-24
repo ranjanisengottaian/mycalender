@@ -1,11 +1,10 @@
-// Home.jsx
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import sampleEvents from '../data/events.json';
 import Navbar from '../components/Navbar';
 import CalendarGrid from '../components/CalenderGrid';
 import Tooltip from '../components/Tooltip';
-import LeftContainer from '../components/LeftContainer'; 
+import LeftContainer from '../components/LeftContainer';
 
 const Home = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
@@ -14,17 +13,31 @@ const Home = () => {
   const [dropdownType, setDropdownType] = useState(null);
   const [hoveredDate, setHoveredDate] = useState(null);
   const [tooltip, setTooltip] = useState({ show: false, content: '', x: 0, y: 0 });
+  const [showLeftContainer, setShowLeftContainer] = useState(true);
 
   useEffect(() => {
     setEvents(sampleEvents);
+    
+    // Check screen size on mount and on resize
+    const checkScreenSize = () => {
+      setShowLeftContainer(window.innerWidth > 600);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   const today = dayjs();
   const currentYear = currentDate.year();
   const currentMonth = currentDate.month();
 
-  const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
   const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
   const getDaysInMonth = (date) => {
@@ -45,11 +58,10 @@ const Home = () => {
 
     const totalCells = Math.ceil(days.length / 7) * 7;
     let nextDay = endOfMonth.add(1, 'day');
-while (days.length < totalCells) {
-  days.push({ isCurrentMonth: false, fullDate: nextDay });
-  nextDay = nextDay.add(1, 'day');
-}
-
+    while (days.length < totalCells) {
+      days.push({ isCurrentMonth: false, fullDate: nextDay });
+      nextDay = nextDay.add(1, 'day');
+    }
 
     return days;
   };
@@ -70,13 +82,19 @@ while (days.length < totalCells) {
       const e = evts[0];
       return `1 event: ${e.title} (${formatTime(e.startTime)} - ${formatTime(e.endTime)})`;
     }
-    return `${evts.length} events:\n` + evts.map(e => `• ${e.title} (${formatTime(e.startTime)} - ${formatTime(e.endTime)})`).join('\n');
+    return `${evts.length} events:\n` +
+      evts.map(e => `• ${e.title} (${formatTime(e.startTime)} - ${formatTime(e.endTime)})`).join('\n');
   };
 
   const handleMouseEnter = (i, evts, e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setHoveredDate(i);
-    setTooltip({ show: true, content: generateTooltipContent(evts), x: rect.left + rect.width / 2, y: rect.top - 10 });
+    setTooltip({
+      show: true,
+      content: generateTooltipContent(evts),
+      x: rect.left + rect.width / 2,
+      y: rect.top - 10
+    });
   };
 
   const handleMouseLeave = () => {
@@ -85,48 +103,47 @@ while (days.length < totalCells) {
   };
 
   const days = getDaysInMonth(currentDate);
-  const years = Array.from({ length: 20 }, (_, i) => 2020 + i);
+
+  const years = Array.from({ length: 2051 - 1900 }, (_, i) => 1900 + i);
 
   return (
     <div className="h-screen bg-white flex flex-col relative">
-    <Navbar
-      {...{
-        goToToday,
-        navigateMonth,
-        currentMonth,
-        currentYear,
-        monthNames,
-        years,
-        handleMonthChange: (m) => setCurrentDate(currentDate.month(m)),
-        handleYearChange: (y) => setCurrentDate(currentDate.year(y)),
-        dropdownType,
-        showDropdown,
-        setDropdownType,
-        setShowDropdown
-      }}
-    />
-    <div className="flex flex-1 overflow-hidden">
-      {/* Left Sidebar */}
-      <LeftContainer currentDate={currentDate} events={events} />
+      <Navbar
+        goToToday={goToToday}
+        navigateMonth={navigateMonth}
+        currentMonth={currentMonth}
+        currentYear={currentYear}
+        monthNames={monthNames}
+        years={years}
+        handleMonthChange={(m) => setCurrentDate(currentDate.month(m))}
+        handleYearChange={(y) => setCurrentDate(currentDate.year(y))}
+        dropdownType={dropdownType}
+        showDropdown={showDropdown}
+        setDropdownType={setDropdownType}
+        setShowDropdown={setShowDropdown}
+      />
 
-      {/* Main Calendar Grid */}
-      <div className="flex-1 overflow-auto">
-        <CalendarGrid
-          {...{
-            days,
-            daysOfWeek,
-            isToday,
-            getEventsForDate,
-            formatTime,
-            handleMouseEnter,
-            handleMouseLeave,
-            hoveredDate
-          }}
-        />
+      <div className="flex flex-1 overflow-hidden">
+        {/* Left Sidebar - Conditionally rendered based on screen size */}
+        {showLeftContainer && <LeftContainer currentDate={currentDate} events={events} />}
+
+        {/* Main Calendar Grid */}
+        <div className={`flex-1 overflow-auto ${!showLeftContainer ? 'w-full' : ''}`}>
+          <CalendarGrid
+            days={days}
+            daysOfWeek={daysOfWeek}
+            isToday={isToday}
+            getEventsForDate={getEventsForDate}
+            formatTime={formatTime}
+            handleMouseEnter={handleMouseEnter}
+            handleMouseLeave={handleMouseLeave}
+            hoveredDate={hoveredDate}
+          />
+        </div>
       </div>
+
+      <Tooltip tooltip={tooltip} />
     </div>
-    <Tooltip tooltip={tooltip} />
-  </div>
   );
 };
 
