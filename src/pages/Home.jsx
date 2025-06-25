@@ -14,11 +14,31 @@ const Home = () => {
   const [hoveredDate, setHoveredDate] = useState(null);
   const [tooltip, setTooltip] = useState({ show: false, content: '', x: 0, y: 0 });
   const [showLeftContainer, setShowLeftContainer] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check localStorage for saved theme preference
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('darkMode') === 'true';
+    }
+    return false;
+  });
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem('darkMode', newMode);
+  };
 
   useEffect(() => {
+    // Apply dark mode class to body
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
     setEvents(sampleEvents);
     
-    // Check screen size on mount and on resize
     const checkScreenSize = () => {
       setShowLeftContainer(window.innerWidth > 600);
     };
@@ -27,7 +47,7 @@ const Home = () => {
     window.addEventListener('resize', checkScreenSize);
     
     return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
+  }, [darkMode]);
 
   const today = dayjs();
   const currentYear = currentDate.year();
@@ -103,11 +123,10 @@ const Home = () => {
   };
 
   const days = getDaysInMonth(currentDate);
-
   const years = Array.from({ length: 2051 - 1900 }, (_, i) => 1900 + i);
 
   return (
-    <div className="h-screen bg-white flex flex-col relative">
+    <div className={`h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-white'} flex flex-col relative`}>
       <Navbar
         goToToday={goToToday}
         navigateMonth={navigateMonth}
@@ -121,13 +140,13 @@ const Home = () => {
         showDropdown={showDropdown}
         setDropdownType={setDropdownType}
         setShowDropdown={setShowDropdown}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
       />
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Left Sidebar - Conditionally rendered based on screen size */}
-        {showLeftContainer && <LeftContainer currentDate={currentDate} events={events} />}
+        {showLeftContainer && <LeftContainer currentDate={currentDate} events={events} darkMode={darkMode} />}
 
-        {/* Main Calendar Grid */}
         <div className={`flex-1 overflow-auto ${!showLeftContainer ? 'w-full' : ''}`}>
           <CalendarGrid
             days={days}
@@ -138,11 +157,12 @@ const Home = () => {
             handleMouseEnter={handleMouseEnter}
             handleMouseLeave={handleMouseLeave}
             hoveredDate={hoveredDate}
+            darkMode={darkMode}
           />
         </div>
       </div>
 
-      <Tooltip tooltip={tooltip} />
+      <Tooltip tooltip={tooltip} darkMode={darkMode} />
     </div>
   );
 };

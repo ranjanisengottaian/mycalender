@@ -8,20 +8,23 @@ const CalendarGrid = ({
   formatTime,
   handleMouseEnter,
   handleMouseLeave,
-  hoveredDate
+  hoveredDate,
+  darkMode
 }) => (
-  <div className="flex-1 p-4 sm:p-6 bg-white">
-    {/* Weekday Headers */}
-    <div className="grid grid-cols-7 mb-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wide">
+  <div className={`flex-1 p-4 sm:p-6 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+    
+    <div className={`grid grid-cols-7 mb-4 text-center text-xs font-bold uppercase tracking-wide ${
+      darkMode ? 'text-gray-400' : 'text-gray-500'
+    }`}>
       {daysOfWeek.map((day) => (
-        <div key={day} >
-          {day}
-        </div>
+        <div key={day}>{day}</div>
       ))}
     </div>
 
     {/* Calendar Grid */}
-    <div className="grid grid-cols-7 border border-gray-400 rounded-lg overflow-hidden shadow-sm">
+    <div className={`grid grid-cols-7 border rounded-lg overflow-hidden shadow-sm ${
+      darkMode ? 'border-gray-700' : 'border-gray-400'
+    }`}>
       {days.map((day, index) => {
         const dayEvents = getEventsForDate(day.fullDate);
         const isCurrentDay = isToday(day.fullDate);
@@ -30,19 +33,25 @@ const CalendarGrid = ({
           <div
             key={index}
             className={`
-              min-h-[120px] p-2 border-t border-l border-gray-400 relative transition-colors
-              ${day.isCurrentMonth ? 'bg-white hover:bg-gray-50' : 'bg-gray-50 text-gray-400'}
-              ${hoveredDate === index ? 'bg-blue-50' : ''}
+              min-h-[120px] p-2 border-t border-l relative transition-colors
+              ${darkMode ? 'border-gray-700' : 'border-gray-400'}
+              ${day.isCurrentMonth ? darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50' : darkMode ? 'bg-gray-900 text-gray-500' : 'bg-gray-50 text-gray-400'}
+              ${hoveredDate === index ? darkMode ? 'bg-gray-700' : 'bg-blue-50' : ''}
             `}
             onMouseEnter={(e) => handleMouseEnter(index, dayEvents, e)}
             onMouseLeave={handleMouseLeave}
           >
             <div className="flex flex-col h-full">
-              {/* Day Number */}
+             
               <div
                 className={`
                   text-sm mb-1 w-8 h-8 flex items-center justify-center rounded-full self-end
-                  ${isCurrentDay ? 'bg-blue-600 text-white font-bold' : day.isCurrentMonth ? 'text-gray-700 font-bold ' : 'text-gray-500'}
+                  ${isCurrentDay 
+                    ? 'bg-blue-600 text-white font-bold' 
+                    : day.isCurrentMonth 
+                      ? darkMode ? 'text-gray-200 font-bold' : 'text-gray-700 font-bold'
+                      : darkMode ? 'text-gray-500' : 'text-gray-400'
+                  }
                 `}
               >
                 {day.fullDate.date()}
@@ -61,7 +70,9 @@ const CalendarGrid = ({
                   </div>
                 ))}
                 {dayEvents.length > 3 && (
-                  <div className="text-xs text-blue-600 px-2 py-1 bg-blue-50 hover:bg-blue-100 rounded cursor-pointer font-medium">
+                  <div className={`text-xs px-2 py-1 rounded cursor-pointer font-medium ${
+                    darkMode ? 'text-blue-400 bg-blue-900 hover:bg-blue-800' : 'text-blue-600 bg-blue-50 hover:bg-blue-100'
+                  }`}>
                     +{dayEvents.length - 3} more
                   </div>
                 )}

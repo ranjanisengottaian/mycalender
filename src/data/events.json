@@ -1,9 +1,30 @@
 [
-  {
+   {
     "startTime": "00:00",
     "endTime": "01:30",
     "color": "#f6be23",
     "title": "Daily Standup",
+    "date": "2025-06-23"
+  },
+  {
+    "startTime": "04:30",
+    "endTime": "06:00",
+    "color": "#1e90ff",
+    "title": "Client Presentation",
+    "date": "2025-06-23"
+  },
+  {
+    "startTime": "08:00",
+    "endTime": "09:30",
+    "color": "#28a745",
+    "title": "Design Review",
+    "date": "2025-06-23"
+  },
+  {
+    "startTime": "11:00",
+    "endTime": "12:30",
+    "color": "#dc3545",
+    "title": "Code Merge Meeting",
     "date": "2025-06-23"
   },
   {
@@ -13,48 +34,67 @@
     "title": "Weekly Catchup",
     "date": "2025-06-23"
   },
-
-    {
-      "startTime": "09:00",
-      "endTime": "10:00",
-      "color": "#34d399",
-      "title": "Google meet",
-      "date": "2025-06-25"
-    },
-    {
-      "startTime": "14:00",
-      "endTime": "15:30",
-      "color": "#8b5cf6",
-      "title": "Project Review",
-      "date": "2025-06-27"
-    },
-    {
-      "startTime": "10:00",
-      "endTime": "11:00",
-      "color": "#06b6d4",
-      "title": "Priya's marriage",
-      "date": "2025-06-30"
-    },
-    {
-      "startTime": "10:00",
-      "endTime": "11:00",
-      "color": "#06b6d4",
-      "title": "Priya marriage",
-      "date": "2025-06-30"
-    },
-    {
-      "startTime": "10:00",
-      "endTime": "11:00",
-      "color": "#06b6d4",
-      "title": "Priya's marriage",
-      "date": "2025-06-30"
-    },
-    {
-      "startTime": "10:00",
-      "endTime": "11:00",
-      "color": "#06b6d4",
-      "title": "Priya's marriage",
-      "date": "2025-06-30"
-    }
-
+  {
+    "startTime": "09:00",
+    "endTime": "10:00",
+    "color": "#34d399",
+    "title": "Google meet",
+    "date": "2025-06-25"
+  },
+  {
+    "startTime": "14:00",
+    "endTime": "15:30",
+    "color": "#8b5cf6",
+    "title": "Project Review",
+    "date": "2025-06-27"
+  },
+  {
+    "startTime": "10:00",
+    "endTime": "11:00",
+    "color": "#06b6d4",
+    "title": "Priya's marriage",
+    "date": "2025-06-30"
+  },
+  {
+    "startTime": "09:00",
+    "endTime": "10:30",
+    "color": "#f43f5e",
+    "title": "Client Meeting",
+    "date": "2025-07-02"
+  },
+  {
+    "startTime": "13:00",
+    "endTime": "14:00",
+    "color": "#3b82f6",
+    "title": "Design Review",
+    "date": "2025-07-03"
+  },
+  {
+    "startTime": "16:00",
+    "endTime": "17:30",
+    "color": "#10b981",
+    "title": "Sprint Planning",
+    "date": "2025-07-04"
+  },
+  {
+    "startTime": "08:00",
+    "endTime": "09:00",
+    "color": "#facc15",
+    "title": "PrePlacement Session",
+    "date": "2025-07-08"
+  },
+  {
+    "startTime": "18:00",
+    "endTime": "21:00",
+    "color": "#ec4899",
+    "title": "Team Dinner",
+    "date": "2025-07-12"
+  },
+  {
+    "startTime": "11:00",
+    "endTime": "12:00",
+    "color": "#22d3ee",
+    "title": "Survey Sparrow drive",
+    "date": "2025-07-15"
+  }
 ]
